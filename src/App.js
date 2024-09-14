@@ -25,17 +25,17 @@ function App() {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <div className="text-center p-4">Loading...</div>;
   }
 
   if (error) {
-    return <p>Error: {error.message}</p>;
+    return <div className="text-red-500 text-center p-4">Error: {error}</div>;
   }
 
   return (
-      <div>
-        <h1>Timeline Data</h1>
-        <pre>{JSON.stringify(data, null, 2)}</pre>
+      <div className="container mx-auto p-4">
+        <h1 className="text-2xl font-bold mb-4">Timeline Data</h1>
+        <pre className="bg-gray-100 p-4 rounded">{JSON.stringify(data, null, 2)}</pre>
       </div>
   );
 }
