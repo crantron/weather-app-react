@@ -35,7 +35,21 @@ function App() {
   return (
       <div className="container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">Timeline Data</h1>
-        <pre className="bg-gray-100 p-4 rounded">{JSON.stringify(data, null, 2)}</pre>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {data.days.map((day, index) => (
+              <div key={index} className="bg-white shadow-md rounded-lg p-4">
+                <h2 className="text-xl font-semibold">{day.date}</h2>
+                <img
+                    src={`https://crantron-goweather.s3.us-east-2.amazonaws.com/${day.icon}.png`}
+                    alt=""
+                    className="w-full h-auto rounded" // Optional styling for the image
+                />
+                <p>Temperature: {day.temperature} °F</p>
+                <p>Conditions: {day.conditions}</p>
+                {/* Add any other details you want to display */}
+              </div>
+          ))}
+        </div>
       </div>
   );
 }
