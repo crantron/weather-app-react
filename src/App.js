@@ -48,6 +48,19 @@ function App() {
       <div className="container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">{data.timezone}</h1>
         <h3 className="text-l font-bold mb-4">{data.description}</h3>
+        <img
+            src={`https://crantron-goweather.s3.us-east-2.amazonaws.com/${data.currentConditions.icon}.png`}
+            alt=""
+            className="w-full h-l rounded" // Optional styling for the image
+        />
+        <h5>Current Conditions:</h5>
+        <p>Conditions: {data.currentConditions.conditions}</p>
+        <p>Feels like: {data.currentConditions.feelslike}</p>
+        <p>Sunrise: {data.currentConditions.sunrise}</p>
+        <p>Sunset: {data.currentConditions.sunset}</p>
+        <p>Humidity: {data.currentConditions.humidity}</p>
+        <p>Temp: {data.currentConditions.temp}</p>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {data.days.map((day, index) => (
               <div key={index} className="bg-white shadow-md rounded-lg p-4">
