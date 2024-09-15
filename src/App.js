@@ -51,7 +51,7 @@ function App() {
         <img
             src={`https://crantron-goweather.s3.us-east-2.amazonaws.com/${data.currentConditions.icon}.png`}
             alt=""
-            className="w-full h-l rounded" // Optional styling for the image
+            className="w-full h-l rounded"
         />
         <h5>Current Conditions:</h5>
         <p>Conditions: {data.currentConditions.conditions}</p>
@@ -68,11 +68,10 @@ function App() {
                 <img
                     src={`https://crantron-goweather.s3.us-east-2.amazonaws.com/${day.icon}.png`}
                     alt=""
-                    className="w-full h-l rounded" // Optional styling for the image
+                    className="w-full h-l rounded"
                 />
                 <p>Temperature: {day.temp} °F</p>
                 <p>Conditions: {day.conditions}</p>
-                {/* Add any other details you want to display */}
               </div>
           ))}
         </div>
