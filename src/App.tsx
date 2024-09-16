@@ -7,28 +7,56 @@ import { WeatherData } from './types';
 
 function App() {
   const [data, setData] = useState<WeatherData | null>(null);
+  const [location, setLocation] = useState<{ lat: number; lon: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('https://arguably-open-pheasant.edgecompute.app/v2/timeline/');
+        if ("geolocation" in navigator) {
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            };
 
-                if (!response.ok) {
-                  throw new Error('Failed to fetch data');
-                }
-                const jsonData: WeatherData = await response.json();
-                setData(jsonData);
-            } catch (error) {
-              const errorMessage = (error as Error).message;
-              setError(errorMessage);
-            } finally {
-              setLoading(false);
-            }
+            navigator.geolocation.watchPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    setLocation({ lat: latitude, lon: longitude });
+                },
+                (error) => {
+                    setError("Unable to retrieve location");
+                },
+                options
+            );
+        } else {
+            setError("Geolocation not supported by this browser");
         }
-        fetchData();
-  }, []);
+    }, [])
+
+    useEffect(() => {
+        if (location) {
+            const fetchData = async () => {
+                try {
+                    const response = await fetch(`https://arguably-open-pheasant.edgecompute.app/v2/timeline/?lat=${location!.lat}&lon=${location!.lon}`);
+
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch data');
+                    }
+                    const jsonData: WeatherData = await response.json();
+                    setData(jsonData);
+                } catch (error) {
+                    const errorMessage = (error as Error).message;
+                    setError(errorMessage);
+                } finally {
+                    setLoading(false);
+                }
+            }
+            fetchData();
+        }
+  }, [location]);
+
+
   if (loading) {
     return <LoadingSpinner />;
   }
