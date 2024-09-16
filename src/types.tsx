@@ -26,6 +26,8 @@ export interface Day {
 export interface WeatherData {
     timezone: string;
     description: string;
+    city: string;
+    country: string;
     currentConditions: CurrentConditions;
     days: Day[];
 }
