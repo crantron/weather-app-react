@@ -3,11 +3,12 @@ import Header from './components/Header/Header';
 import LoadingSpinner from "./components/Util/LoadingSpinner";
 import ErrorMessage from "./components/Util/ErrorMessage";
 import Timeline from "./components/Page/Timeline";
-import { WeatherData } from './types';
+import { WeatherData, RevGeoData } from './types';
 
 function App() {
-    const [data, setData] = useState<WeatherData | null>(null);
     const [location, setLocation] = useState<{ lat: number; lon: number } | null>(null);
+    const [data, setData] = useState<WeatherData | null>(null);
+    const [revGeoData, setRevGeoData] = useState<RevGeoData | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -54,7 +55,29 @@ function App() {
             }
             fetchData();
         }
-  }, [location]);
+   }, [location]);
+
+    useEffect(() => {
+        if (location && data) {
+            const fetchRevGeoData = async () => {
+                try {
+                    const response = await fetch(`https://arguably-open-pheasant.edgecompute.app/v2/location-name-resolver/?lat=${location!.lat}&lon=${location!.lon}`)
+
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch data');
+                    }
+                    const jsonData: RevGeoData = await response.json();
+                    setRevGeoData(jsonData);
+                } catch (error) {
+                    const errorMessage = (error as Error).message;
+                    setError(errorMessage);
+                } finally {
+                    setLoading(false);
+                }
+            }
+            fetchRevGeoData();
+        }
+    }, [location, data]);
 
 
   if (loading) {
@@ -68,7 +91,7 @@ function App() {
   return (
       <div>
           <Header />
-          <Timeline data={data} />
+          <Timeline data={data} revGeoData={revGeoData}/>
       </div>
   );
 }
