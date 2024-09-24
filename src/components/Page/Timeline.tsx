@@ -26,7 +26,7 @@ const Timeline: React.FC<TimelineProps> = ({data}) => {
                         <p>Feels like: {data?.currentConditions.feelslike}</p>
                         <p>Conditions: {data?.currentConditions.conditions}</p>
                         <p>Sunrise: <NormalizeTime time={data?.currentConditions.sunrise ?? null} /></p>
-                        <p>Sunset: {data?.currentConditions.sunset}</p>
+                        <p>Sunset: <NormalizeTime time={data?.currentConditions.sunset ?? null} /></p>
                         <p>Humidity: {data?.currentConditions.humidity}</p>
                     </div>
                 </div>

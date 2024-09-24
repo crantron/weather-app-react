@@ -13,7 +13,7 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({ time }) => {
     const formattedTime = convertTo12Hour(time);
 
     return (
-            <p>{formattedTime}</p>
+            <span>{formattedTime}</span>
     );
 }
 
