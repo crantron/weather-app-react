@@ -1,11 +1,6 @@
 import React from 'react';
-
-interface Hour {
-    time: string;
-    icon: string;
-    temp: number;
-    conditions: string;
-}
+import { Hour } from '../../types';
+import NormalizeTime from "../Util/NormalizeTime";
 
 interface HourlyProps {
     hours: Hour[];
@@ -19,9 +14,9 @@ const Hourly: React.FC<HourlyProps> = ({ hours }) => {
                 {hours.map((hour, index) => (
                     <div
                         key={index}
-                        className="flex-shrink-0 bg-teal-300 dark:bg-teal-500 rounded-lg p-4 flex flex-col items-center min-w-[80px]"
+                        className="flex-shrink-0 bg-blue-300 rounded-lg p-4 flex flex-col items-center min-w-[80px]"
                     >
-                        <p className="text-sm">{hour.time}</p>
+                        <NormalizeTime time={hour.datetime} />
                         <img
                             src={`https://raw.githubusercontent.com/visualcrossing/WeatherIcons/58c79610addf3d4d91471abbb95b05e96fb43019/SVG/4th%20Set%20-%20Color/${hour.icon}.svg`}
                             alt={hour.conditions}

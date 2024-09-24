@@ -6,10 +6,10 @@ import Timeline from "./components/Page/Timeline";
 import { WeatherData } from './types';
 
 function App() {
-  const [data, setData] = useState<WeatherData | null>(null);
-  const [location, setLocation] = useState<{ lat: number; lon: number } | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+    const [data, setData] = useState<WeatherData | null>(null);
+    const [location, setLocation] = useState<{ lat: number; lon: number } | null>(null);
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         if ("geolocation" in navigator) {
@@ -19,7 +19,7 @@ function App() {
                 maximumAge: 0
             };
 
-            navigator.geolocation.watchPosition(
+            navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
                     setLocation({ lat: latitude, lon: longitude });

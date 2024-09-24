@@ -6,17 +6,22 @@ export interface CurrentConditions {
     sunset: string;
     humidity: number;
     temp: number;
+    cloudcover: string;
+    precip: string;
+    snow: string;
+
 }
 
 export interface Hour {
-    time: string;
+    datetime: string;
     icon: string;
     temp: number;
     conditions: string;
 }
 
 export interface Day {
-    date: string;
+    datetime: string;
+    datetimeEpoch: number;
     icon: string;
     temp: number;
     conditions: string;
