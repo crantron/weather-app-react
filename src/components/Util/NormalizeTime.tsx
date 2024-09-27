@@ -5,7 +5,7 @@ interface TimeDisplayProps {
 }
 
 // Component to display time
-const TimeDisplay: React.FC<TimeDisplayProps> = ({ time }) => {
+const TimeDisplay: React.FC<TimeDisplayProps> = ({time}) => {
     if (!time) {
         return <p>No time available</p>
     }
@@ -13,7 +13,7 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({ time }) => {
     const formattedTime = convertTo12Hour(time);
 
     return (
-            <span>{formattedTime}</span>
+        <span>{formattedTime}</span>
     );
 }
 

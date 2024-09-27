@@ -1,14 +1,15 @@
 import React from 'react';
 import Days from "../Cards/Days";
-import { WeatherData, RevGeoData } from '../../types';
+import { WeatherData, RevGeoData, BeachData } from '../../types';
 import NormalizeTime from "../Util/NormalizeTime";
 
 interface TimelineProps {
         data: WeatherData | null;
         revGeoData: RevGeoData | null;
+        beachData: BeachData | null;
 }
 
-const Timeline: React.FC<TimelineProps> = ({data, revGeoData}) => {
+const Timeline: React.FC<TimelineProps> = ({data, revGeoData, beachData}) => {
         return (
                 <div className="container mx-auto p-4">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
@@ -38,6 +39,12 @@ const Timeline: React.FC<TimelineProps> = ({data, revGeoData}) => {
                                     <p>Cloud Cover: {data?.currentConditions.cloudcover}</p>
                                     <p>Precipitation: {data?.currentConditions.precip}</p>
                                     <p>Snow: {data?.currentConditions.snow}</p>
+                                    <h5>
+                                        <p>{beachData?.results[0].name}</p>
+                                    </h5>
+                                </div>
+                                <div>
+
                                 </div>
                         </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

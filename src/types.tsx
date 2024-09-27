@@ -64,3 +64,87 @@ export interface RevGeoData {
     results: RevGeoResult[]
 }
 
+export interface BeachData {
+    results: FSPlace[];
+    context: FSContext;
+}
+
+export interface FSPlace {
+    fsq_id: string;
+    categories: FSCategory[];
+    chains: any[];
+    closed_bucket: string;
+    distance: number;
+    geocodes: FSGeocodes;
+    link: string;
+    location: Location;
+    name: string;
+    related_places: FSRelatedPlaces;
+    timezone: string;
+}
+
+export interface FSCategory {
+    id: number;
+    name: string;
+    short_name: string;
+    plural_name: string;
+    icon: FSIcon;
+}
+
+export interface FSIcon {
+    prefix: string;
+    suffix: string;
+}
+
+export interface FSGeocodes {
+    main: FSCoordinates;
+    roof: FSCoordinates;
+}
+
+export interface FSCoordinates {
+    latitude: number;
+    longitude: number;
+}
+
+export interface FSLocation {
+    address?: string;
+    census_block?: string;
+    country: string;
+    cross_street?: string;
+    dma: string;
+    formatted_address: string;
+    locality: string;
+    postcode: string;
+    region: string;
+}
+
+export interface FSRelatedPlaces {
+    parent?: FSParentPlace;
+    children?: FSChildPlace[];
+}
+
+export interface FSParentPlace {
+    fsq_id: string;
+    categories: FSCategory[];
+    name: string;
+}
+
+export interface FSChildPlace {
+    fsq_id: string;
+    categories: FSCategory[];
+    name: string;
+}
+
+export interface FSContext {
+    geo_bounds: FSGeoBounds;
+}
+
+export interface FSGeoBounds {
+    circle: FSCircle;
+}
+
+export interface FSCircle {
+    center: FSCoordinates;
+    radius: number;
+}
+
