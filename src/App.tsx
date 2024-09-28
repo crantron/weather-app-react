@@ -17,21 +17,37 @@ function App() {
     useEffect(() => {
         if ("geolocation" in navigator) {
             const options = {
-                enableHighAccuracy: false,
-                timeout: 1,
-                maximumAge: 1000
+                enableHighAccuracy: true,
+                timeout: 20000,
+
             };
 
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const {latitude, longitude} = position.coords;
-                    setLocation({lat: latitude, lon: longitude});
-                },
-                (error) => {
-                    setError("Unable to retrieve location");
-                },
-                options
-            );
+            const onSuccess = (position: GeolocationPosition) => {
+                const { latitude, longitude } = position.coords;
+                setLocation({ lat: latitude, lon: longitude });
+                setError(null);  // Clear any previous error
+            };
+
+            const onError = (error: GeolocationPositionError) => {
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        setError('Permission denied. Please allow location access.');
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        setError('Position unavailable. Ensure your GPS is working.');
+                        break;
+                    case error.TIMEOUT:
+                        console.log('something')
+                        setError('Position unavailable. Ensure your GPS is working.');
+                        break;
+                    default:
+                        setError('An unknown error occurred.');
+                }
+            };
+
+
+            navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+
         } else {
             setError("Geolocation not supported by this browser");
         }
@@ -41,13 +57,21 @@ function App() {
         if (location) {
             const fetchData = async () => {
                 try {
-                    const response = await fetch(`https://arguably-open-pheasant.edgecompute.app/v2/timeline/?lat=${location!.lat}&lon=${location!.lon}`);
-
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch data');
+                    if (location!.lat === 0 && location!.lon === 0) {
+                        const response = await fetch(`https://arguably-open-pheasant.edgecompute.app/v2/timeline/`);
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch data');
+                        }
+                        const jsonData: WeatherData = await response.json();
+                        setData(jsonData);
+                    } else {
+                        const response = await fetch(`https://arguably-open-pheasant.edgecompute.app/v2/timeline/?lat=${location!.lat}&lon=${location!.lon}`);
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch data');
+                        }
+                        const jsonData: WeatherData = await response.json();
+                        setData(jsonData);
                     }
-                    const jsonData: WeatherData = await response.json();
-                    setData(jsonData);
                 } catch (error) {
                     const errorMessage = (error as Error).message;
                     setError(errorMessage);

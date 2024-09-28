@@ -1,7 +1,8 @@
 import React from 'react';
 import Days from "../Cards/Days";
-import { WeatherData, RevGeoData, BeachData } from '../../types';
+import { WeatherData, RevGeoData, BeachData, FSPlace } from '../../types';
 import NormalizeTime from "../Util/NormalizeTime";
+import Beaches from "../Tab/Beaches";
 
 interface TimelineProps {
         data: WeatherData | null;
@@ -40,12 +41,21 @@ const Timeline: React.FC<TimelineProps> = ({data, revGeoData, beachData}) => {
                                     <p>Precipitation: {data?.currentConditions.precip}</p>
                                     <p>Snow: {data?.currentConditions.snow}</p>
                                     <h5>
+                                        {beachData?.results.map((beach: FSPlace, index: number) => (
+                                            <Beaches
+                                                key={index}
+                                                name={beach.name}
+                                                address='N/A'
+                                                distance={beach.distance}
+                                                icon={`${beach.categories[0].icon.prefix}88${beach.categories[0].icon.suffix}`}
+                                            />
+                                        ))}
+
                                         <p>{beachData?.results[0].name}</p>
                                     </h5>
                                 </div>
-                                <div>
-
-                                </div>
+                            <div>
+                            </div>
                         </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 {data?.days.map((day, index) => (
