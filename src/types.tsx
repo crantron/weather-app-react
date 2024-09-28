@@ -77,7 +77,7 @@ export interface FSPlace {
     distance: number;
     geocodes: FSGeocodes;
     link: string;
-    location: Location;
+    location: FSLocation;
     name: string;
     related_places: FSRelatedPlaces;
     timezone: string;
