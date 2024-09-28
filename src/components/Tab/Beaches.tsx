@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
+import {BeachData, FSPlace} from "../../types";
 
 
 interface BeachProps {
-    name: string;
-    address: string;
-    distance: number;
-    icon: string;
+    beachData: BeachData | null;
 }
 
-const Beaches: React.FC<BeachProps> = ({ name, address, distance, icon }) => {
+const Beaches: React.FC<BeachProps> = ({ beachData }) => {
     return (
-        <div className="beach-cardß">
-            <img src={`${icon}`} alt={name} className="w-16 h-16 mb-4" />
-            <h2 className="text-xl font-semibold">{name}</h2>
-            <p>Address: {address}</p>
-            <p>Distance: {distance} meters away</p>
-        </div>
-    );
+        <h5>
+            {beachData?.results.map((beach: FSPlace, index: number) => (
+                <div className="beach-card">
+                    <h2 className="text-xl font-semibold">{beach.name}</h2>
+                </div>
+            ))}
+        </h5>
+
+    )
+        ;
 };
 
 export default Beaches;

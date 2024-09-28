@@ -25,7 +25,7 @@ function App() {
             const onSuccess = (position: GeolocationPosition) => {
                 const { latitude, longitude } = position.coords;
                 setLocation({ lat: latitude, lon: longitude });
-                setError(null);  // Clear any previous error
+                setError(null);
             };
 
             const onError = (error: GeolocationPositionError) => {
