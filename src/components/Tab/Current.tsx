@@ -7,10 +7,11 @@ import Conditions from "../Tab/Conditions";
 interface CurrentProps {
     beachData: BeachData | null;
     data: WeatherData | null;
+    setLocation: (location: { lat: number; lon: number }) => void;
 
 }
 
-const Current: React.FC<CurrentProps> = ({data, beachData}) => {
+const Current: React.FC<CurrentProps> = ({data, beachData, setLocation}) => {
     const [activeTab, setActiveTab] = React.useState(0);
 
     return (
@@ -37,7 +38,7 @@ const Current: React.FC<CurrentProps> = ({data, beachData}) => {
                 <Conditions data={data}/>
             )}
             {activeTab === 1 && (
-                <Beaches beachData={beachData}/>
+                <Beaches beachData={beachData} setLocation={setLocation} />
             )}
         </div>
     );

@@ -7,9 +7,10 @@ interface TimelineProps {
         data: WeatherData | null;
         revGeoData: RevGeoData | null;
         beachData: BeachData | null;
+        setLocation: (location: { lat: number; lon: number }) => void;
 }
 
-const Timeline: React.FC<TimelineProps> = ({data, revGeoData, beachData}) => {
+const Timeline: React.FC<TimelineProps> = ({data, revGeoData, beachData, setLocation}) => {
         return (
                 <div className="container mx-auto p-4">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
@@ -26,7 +27,7 @@ const Timeline: React.FC<TimelineProps> = ({data, revGeoData, beachData}) => {
                                             className="w-full h-l rounded"
                                         />
                                     </div>
-                                <Current  data={data} beachData={beachData}/>
+                                <Current  data={data} beachData={beachData} setLocation={setLocation} />
                                 <div>
                             </div>
                         </div>

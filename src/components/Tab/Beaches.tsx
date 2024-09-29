@@ -4,13 +4,14 @@ import Days from "../Cards/Days";
 
 interface BeachProps {
     beachData: BeachData | null;
+    setLocation: (location: { lat: number; lon: number }) => void;
 }
 
 interface BeachWeatherMap {
     [key: string]: WeatherData;
 }
 
-const Beaches: React.FC<BeachProps> = ({ beachData }) => {
+const Beaches: React.FC<BeachProps> = ({ beachData, setLocation }) => {
     const [beachLoc, setBeachLoc] = useState<BeachWeatherMap>({});
 
     const fetchBeachWeather = async (lat: number, lon: number, beachId: string) => {
@@ -39,10 +40,14 @@ const Beaches: React.FC<BeachProps> = ({ beachData }) => {
         }
     }, [beachData]);
 
+    const refreshTimeline = (lat: number, lon: number) => {
+        setLocation({ lat, lon });
+    };
+
     return (
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" >
             {beachData?.results.map((beach: FSPlace, index: number) => (
-                <div id={beach.fsq_id} className="bg-white shadow-lg rounded-lg p-4 mt-2 mb-2">
+                <div id={beach.fsq_id} className="bg-white shadow-lg rounded-lg p-4 mt-2 mb-2" onClick={() => refreshTimeline(beach.geocodes.main.latitude, beach.geocodes.main.longitude)}>
                     <h3 className="text-l font-semibold">{beach.name}</h3>
                     {beachLoc[beach.fsq_id] ? (
                         <div className="mt-4">

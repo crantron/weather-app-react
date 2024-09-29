@@ -107,7 +107,7 @@ function App() {
     return (
         <div>
             <Header/>
-            <Timeline data={data} revGeoData={revGeoData} beachData={beachData} />
+            <Timeline data={data} revGeoData={revGeoData} beachData={beachData} setLocation={setLocation} />
         </div>
     );
 }
