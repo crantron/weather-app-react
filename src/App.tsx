@@ -3,13 +3,14 @@ import Header from './components/Header/Header';
 import LoadingSpinner from "./components/Util/LoadingSpinner";
 import ErrorMessage from "./components/Util/ErrorMessage";
 import Timeline from "./components/Page/Timeline";
-import { WeatherData, RevGeoData, BeachData } from './types';
+import { WeatherData, RevGeoData, BeachData, TrailData } from './types';
 import { useFetchWeatherData } from './services/VisualCrossing';
 
 function App() {
     const [location, setLocation] = useState<{ lat: number; lon: number } | null>(null);
     const [revGeoData, setRevGeoData] = useState<RevGeoData | null>(null);
     const [beachData, setBeachData] = useState<BeachData | null>(null);
+    const [trailData, setTrailData] = useState<BeachData | null>(null);
     const [geoError, setGeoError] = useState<string | null>(null); // Renamed error to geoError
     const [geoLoading, setGeoLoading] = useState<boolean>(true); // Renamed loading to geoLoading
 
@@ -94,6 +95,26 @@ function App() {
         }
     }, [location, data, revGeoData]);
 
+    useEffect(() => {
+        if (location && data && revGeoData) {
+            const fetchTrailData = async () => {
+                try {
+                    const response = await fetch(`https://arguably-open-pheasant.edgecompute.app/v2/trails-nearby/?lat=${location!.lat}&lon=${location!.lon}`);
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch data');
+                    }
+                    const jsonData: TrailData = await response.json();
+                    setTrailData(jsonData);
+                } catch (error) {
+                    const errorMessage = (error as Error).message;
+                    setGeoError(errorMessage);
+                } finally {
+                    setGeoLoading(false);
+                }
+            };
+            fetchTrailData();
+        }
+    }, [location, data, revGeoData]);
 
     if (geoLoading || weatherLoading) {
         return <LoadingSpinner/>;
@@ -107,7 +128,7 @@ function App() {
     return (
         <div>
             <Header/>
-            <Timeline data={data} revGeoData={revGeoData} beachData={beachData} setLocation={setLocation} />
+            <Timeline data={data} revGeoData={revGeoData} beachData={beachData} trailData={trailData} setLocation={setLocation} />
         </div>
     );
 }

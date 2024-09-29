@@ -69,6 +69,11 @@ export interface BeachData {
     context: FSContext;
 }
 
+export interface TrailData {
+    results: FSPlace[];
+    context: FSContext;
+}
+
 export interface FSPlace {
     fsq_id: string;
     categories: FSCategory[];

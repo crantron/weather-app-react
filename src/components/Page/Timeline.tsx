@@ -1,16 +1,17 @@
 import React from 'react';
 import Days from "../Cards/Days";
 import Current from "../Tab/Current"
-import { WeatherData, RevGeoData, BeachData } from '../../types';
+import {WeatherData, RevGeoData, BeachData, TrailData} from '../../types';
 
 interface TimelineProps {
         data: WeatherData | null;
         revGeoData: RevGeoData | null;
         beachData: BeachData | null;
+        trailData: TrailData | null;
         setLocation: (location: { lat: number; lon: number }) => void;
 }
 
-const Timeline: React.FC<TimelineProps> = ({data, revGeoData, beachData, setLocation}) => {
+const Timeline: React.FC<TimelineProps> = ({data, revGeoData, beachData, trailData, setLocation}) => {
         return (
                 <div className="container mx-auto p-4">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
@@ -27,7 +28,7 @@ const Timeline: React.FC<TimelineProps> = ({data, revGeoData, beachData, setLoca
                                             className="w-full h-l rounded"
                                         />
                                     </div>
-                                <Current  data={data} beachData={beachData} setLocation={setLocation} />
+                                <Current  data={data} beachData={beachData} setLocation={setLocation} trailData={trailData}/>
                                 <div>
                             </div>
                         </div>
