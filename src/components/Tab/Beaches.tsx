@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {BeachData, FSPlace, WeatherData} from "../../types";
-import Days from "../Cards/Days";
 
 interface BeachProps {
     beachData: BeachData | null;

@@ -1,6 +1,6 @@
 {
-  "short_name": "Crantron Weather App",
-  "name": "Lat Long IP based weather app ",
+  "short_name": "Localsonly.today",
+  "name": "Delivers the weather and things to do around nearby ",
   "icons": [
     {
       "src": "favicon.ico",
