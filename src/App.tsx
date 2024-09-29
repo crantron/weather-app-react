@@ -35,7 +35,6 @@ function App() {
                         setGeoError('Position unavailable. Ensure your GPS is working.');
                         break;
                     case error.TIMEOUT:
-                        console.log('something')
                         setGeoError('Position unavailable. Ensure your GPS is working.');
                         break;
                     default:

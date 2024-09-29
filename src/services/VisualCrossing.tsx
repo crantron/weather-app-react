@@ -10,8 +10,10 @@ export const useFetchWeatherData = (location: { lat: number; lon: number } | nul
         if (location) {
             const fetchData = async () => {
                 try {
+                    //IP based geolocation
                     let url = `https://arguably-open-pheasant.edgecompute.app/v2/timeline/`;
 
+                    //GPS based geolocation
                     if (location.lat !== 0 || location.lon !== 0) {
                         url = `https://arguably-open-pheasant.edgecompute.app/v2/timeline/?lat=${location.lat}&lon=${location.lon}`;
                     }

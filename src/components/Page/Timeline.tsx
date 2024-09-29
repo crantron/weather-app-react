@@ -1,8 +1,7 @@
 import React from 'react';
 import Days from "../Cards/Days";
 import Current from "../Tab/Current"
-import { WeatherData, RevGeoData, BeachData, FSPlace } from '../../types';
-import beaches from "../Tab/Beaches";
+import { WeatherData, RevGeoData, BeachData } from '../../types';
 
 interface TimelineProps {
         data: WeatherData | null;
