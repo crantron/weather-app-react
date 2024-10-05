@@ -32,6 +32,8 @@ export interface Day {
 export interface WeatherData {
     timezone: string;
     description: string;
+    latitude: number;
+    longitude: number;
     city: string;
     country: string;
     currentConditions: CurrentConditions;
@@ -64,12 +66,7 @@ export interface RevGeoData {
     results: RevGeoResult[]
 }
 
-export interface BeachData {
-    results: FSPlace[];
-    context: FSContext;
-}
-
-export interface TrailData {
+export interface ActivityData {
     results: FSPlace[];
     context: FSContext;
 }

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import NormalizeTime from "../Util/NormalizeTime";
-import {BeachData, WeatherData} from "../../types";
+import {WeatherData} from "../../types";
 
 interface ConditionsProps {
     data: WeatherData | null;
 }
 
-const Beaches: React.FC<ConditionsProps> = ({ data }) => {
+const Conditions: React.FC<ConditionsProps> = ({ data }) => {
     return (
         <div>
             <h3 className="text-l font-bold mb-4">{data?.currentConditions.conditions} - {data?.description}</h3>
@@ -25,4 +25,4 @@ const Beaches: React.FC<ConditionsProps> = ({ data }) => {
     );
 };
 
-export default Beaches;
+export default Conditions;

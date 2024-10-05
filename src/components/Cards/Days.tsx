@@ -16,6 +16,7 @@ const Days: React.FC<DaysProps> = ({ date, dateEpoch, icon, temp, conditions, ho
     return (
         <div className="bg-white shadow-lg rounded-lg p-4">
             <h3 className="font-extrabold"><NormalizeDay epoch={dateEpoch} /></h3>
+
             <img
                 src={`https://raw.githubusercontent.com/visualcrossing/WeatherIcons/58c79610addf3d4d91471abbb95b05e96fb43019/SVG/4th%20Set%20-%20Color/${icon}.svg`}
                 alt={conditions}
