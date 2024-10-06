@@ -34,7 +34,6 @@ const Activity: React.FC<ActivityProps> = ({ type, data, setLocation, setLocatio
                 <div key={activity.fsq_id} className="bg-white shadow-lg rounded-lg p-4 mt-2 mb-2" onClick={() => refreshTimeline(activity.geocodes.main.latitude, activity.geocodes.main.longitude, activity.name)}>
                     <h3 className="text-l font-semibold">{activity.name}</h3>
                     <p>{activity?.location?.formatted_address}</p>
-                    <p>{activity?.distance}</p>
                 </div>
             ))}
         </section>

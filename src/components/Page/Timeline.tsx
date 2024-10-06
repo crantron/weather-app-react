@@ -25,10 +25,11 @@ const Timeline: React.FC<TimelineProps> = ({data, revGeoData, setLocation}) => {
                                 )}
 
                             </h1>
-                            <div
-                                className="text-center">{revGeoData?.results[0].components.road}, {revGeoData?.results[0].components.postcode}</div>
+                            <div className="text-center">
+                                {revGeoData?.results[0].components.road}, {revGeoData?.results[0].components.postcode}
+                            </div>
                         </div>
-                        <div className="bg-blue-300 p-4  mb-4 ">
+                        <div className="bg-blue-300 p-4  mb-4">
                             <div className="gap-4 mb-4">
                                <Conditions data={data} />
                             </div>

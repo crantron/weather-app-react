@@ -40,6 +40,7 @@ const Conditions: React.FC<ConditionsProps> = ({ data }) => {
         setDayTab((nextTab) => (nextTab === tabs.length - 1 ? 0 : nextTab + 1));
     }
 
+    // @ts-ignore
     return (
         <div>
             <h3 className="text-l font-bold mb-4">{data?.currentConditions.conditions} - {data?.description}</h3>
@@ -65,7 +66,12 @@ const Conditions: React.FC<ConditionsProps> = ({ data }) => {
                     </button>
 
                     <div className="px-4 py-2 font-semibold border-b-2 border-blue-500 text-blue-500">
-                        <NormalizeDay epoch={tabs[dayTab]?.dateEpoch}/>
+                        {dayTab === 0 ? (
+                            <span>Today</span>
+                        ) : (
+                            <NormalizeDay epoch={tabs[dayTab]?.dateEpoch}/>
+                        )}
+
                     </div>
                     <button
                         className="px-4 py-2 bg-blue-400 text-white rounded"
