@@ -3,7 +3,7 @@ import Header from './components/Header/Header';
 import LoadingSpinner from "./components/Util/LoadingSpinner";
 import ErrorMessage from "./components/Util/ErrorMessage";
 import Timeline from "./components/Page/Timeline";
-import { RevGeoData } from './types';
+import {RevGeoData, WeatherData} from './types';
 import { useFetchWeatherData } from './services/VisualCrossing';
 
 function App() {
@@ -84,7 +84,7 @@ function App() {
 
     return (
         <div>
-            <Header/>
+            <Header data={data} />
             <Timeline data={data} revGeoData={revGeoData} setLocation={setLocation} />
         </div>
     );

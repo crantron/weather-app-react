@@ -39,6 +39,7 @@ export interface WeatherData {
     currentConditions: CurrentConditions;
     days: Day[];
 }
+
 export interface RevGeoComponents {
     ISO_3166_1_alpha_2: string;
     ISO_3166_1_alpha_3: string;
