@@ -21,7 +21,7 @@ const Activity: React.FC<ActivityProps> = ({ type, data, setLocation, setLocatio
     const {activityData, error, loading} = useFetchActivities({ lat: lat, lon: lon }, type);
 
     if (loading) {
-        return <LoadingSpinner />;
+        return <LoadingSpinner location={null} revGeoData={null} isMain={false}/>;
     }
 
     if (error) {

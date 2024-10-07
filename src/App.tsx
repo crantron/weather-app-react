@@ -3,11 +3,11 @@ import Header from './components/Header/Header';
 import LoadingSpinner from "./components/Util/LoadingSpinner";
 import ErrorMessage from "./components/Util/ErrorMessage";
 import Timeline from "./components/Page/Timeline";
-import {RevGeoData, WeatherData} from './types';
+import {Location, RevGeoData} from './types';
 import { useFetchWeatherData } from './services/VisualCrossing';
 
 function App() {
-    const [location, setLocation] = useState<{ lat: number; lon: number } | null>(null);
+    const [location, setLocation] = useState<Location | null>(null);
     const [revGeoData, setRevGeoData] = useState<RevGeoData | null>(null);
     const [geoError, setGeoError] = useState<string | null>(null);
     const [geoLoading, setGeoLoading] = useState<boolean>(true);
@@ -74,7 +74,7 @@ function App() {
 
 
     if (geoLoading || weatherLoading) {
-        return <LoadingSpinner/>;
+        return <LoadingSpinner location={location} revGeoData={revGeoData} isMain={true} />;
     }
 
     if (geoError || weatherError) {

@@ -1,3 +1,7 @@
+export interface Location {
+    lat: number;
+    lon: number;
+}
 export interface CurrentConditions {
     icon: string;
     conditions: string;
